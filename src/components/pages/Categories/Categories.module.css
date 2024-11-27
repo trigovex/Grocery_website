@@ -1,0 +1,14 @@
+.categoriesContainer {
+  padding: 20px;
+  text-align: center;
+}
+
+.categoriesContainer h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.categoriesContainer p {
+  font-size: 1rem;
+  color: #555;
+} 

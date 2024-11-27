@@ -1,0 +1,183 @@
+   /* src/components/pages/Categories/Dairy.module.css */
+   :root {
+     --primary-green: #00b761;
+     --dark-green: #008c4a;
+     --light-green: #f0fff4;
+     --accent-orange: #ff6b6b;
+     --text-dark: #1a1a1a;
+     --text-light: #666666;
+     --white: #ffffff;
+     --gray-100: #f8f9fa;
+     --gray-200: #e9ecef;
+   }
+
+   .dairyContainer {
+     max-width: 1400px;
+     margin: 2rem auto;
+     padding: 2rem;
+   }
+
+   .categoryHeader {
+     margin-bottom: 2.5rem;
+     text-align: center;
+   }
+
+   .categoryHeader h1 {
+     color: var(--text-dark);
+     font-size: 2rem;
+     font-weight: 600;
+     margin-bottom: 0.5rem;
+   }
+
+   .subtitle {
+     color: var(--text-light);
+     font-size: 1.1rem;
+   }
+
+   .filters {
+     display: flex;
+     justify-content: flex-end;
+     margin-bottom: 2rem;
+   }
+
+   .filterGroup {
+     display: flex;
+     gap: 1rem;
+   }
+
+   .select {
+     padding: 0.8rem 1.5rem;
+     border: 2px solid var(--gray-200);
+     border-radius: 8px;
+     background-color: var(--white);
+     color: var(--text-dark);
+     font-size: 0.9rem;
+     cursor: pointer;
+     transition: all 0.3s ease;
+   }
+
+   .select:focus {
+     outline: none;
+     border-color: var(--primary-green);
+     box-shadow: 0 0 0 4px rgba(0, 183, 97, 0.1);
+   }
+
+   .productGrid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+     gap: 2rem;
+   }
+
+   .productCard {
+     background-color: var(--white);
+     border-radius: 12px;
+     border: 1px solid var(--gray-200);
+     overflow: hidden;
+     transition: all 0.3s ease;
+   }
+
+   .productCard:hover {
+     transform: scale(1.05);
+   }
+
+   .imageContainer {
+     position: relative;
+   }
+
+   .wishlistButton {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     background: none;
+     border: none;
+     cursor: pointer;
+     color: var(--text-dark);
+     font-size: 1.2rem;
+     transition: color 0.3s ease;
+   }
+
+   .wishlistButton:hover {
+     color: var(--accent-orange);
+   }
+
+   .organicBadge {
+     position: absolute;
+     top: 10px;
+     left: 10px;
+     background-color: var(--primary-green);
+     color: var(--white);
+     padding: 0.2rem 0.5rem;
+     border-radius: 4px;
+     font-size: 0.8rem;
+   }
+
+   .productContent {
+     padding: 1.5rem;
+   }
+
+   .productName {
+     color: var(--text-dark);
+     font-size: 1.2rem;
+     font-weight: 600;
+     margin-bottom: 0.5rem;
+   }
+
+   .productDescription {
+     color: var(--text-light);
+     font-size: 0.9rem;
+     margin-bottom: 1rem;
+   }
+
+   .productMeta {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 1rem;
+   }
+
+   .rating {
+     display: flex;
+     align-items: center;
+     gap: 0.2rem;
+   }
+
+   .starIcon {
+     color: var(--accent-orange);
+   }
+
+   .productFooter {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-top: 1rem;
+   }
+
+   .priceContainer {
+     display: flex;
+     align-items: baseline;
+     gap: 0.2rem;
+   }
+
+   .price {
+     font-weight: bold;
+     color: var(--primary-green);
+   }
+
+   .unit {
+     color: var(--text-light);
+     font-size: 0.9rem;
+   }
+
+   .addToCartButton {
+     background-color: var(--primary-green);
+     color: var(--white);
+     border: none;
+     border-radius: 8px;
+     padding: 0.8rem 1.5rem;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+   }
+
+   .addToCartButton:hover {
+     background-color: var(--dark-green);
+   }

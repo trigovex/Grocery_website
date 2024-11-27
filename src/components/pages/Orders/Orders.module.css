@@ -1,0 +1,102 @@
+/* src/components/pages/OrderHistory/OrderHistory.module.css */
+:root {
+  --primary-green: #00b761;
+  --dark-green: #008c4a;
+  --light-green: #f0fff4;
+  --accent-orange: #ff6b6b;
+  --text-dark: #1a1a1a;
+  --text-light: #666666;
+  --white: #ffffff;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+}
+
+.orderHistoryContainer {
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 8px; /* Rounded corners for the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.orderHistoryContainer h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--text-dark); /* Dark text for better readability */
+}
+
+.orderHistoryContainer p {
+  margin-bottom: 20px;
+  color: var(--text-light); /* Lighter text for secondary information */
+}
+
+.order {
+  margin-bottom: 30px; /* Space between orders */
+  border: 1px solid #ddd; /* Border around each order */
+  padding: 15px; /* Padding inside the order */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #fff; /* White background for each order */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.orderDetails {
+  display: flex; /* Flexbox for order details */
+  justify-content: space-between; /* Distribute space evenly */
+  margin-bottom: 15px; /* Space below order details */
+}
+
+.orderStatus {
+  font-weight: 500; /* Bold for status */
+  color: var(--primary-green); /* Green color for status */
+}
+
+.paymentInfo {
+  text-align: right; /* Align payment info to the right */
+}
+
+.orderItems {
+  display: flex; /* Flexbox for item layout */
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  gap: 15px; /* Space between items */
+}
+
+.productDetails {
+  display: flex; /* Flexbox for product details */
+  align-items: center; /* Center items vertically */
+  flex: 1; /* Allow this section to grow */
+  margin-right: 20px; /* Space between products */
+}
+
+.productImage {
+  width: 60px; /* Slightly larger image for better visibility */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 4px; /* Rounded corners for images */
+  margin-right: 15px; /* Space between image and text */
+}
+
+.itemDetails {
+  flex-grow: 1; /* Allow details to take remaining space */
+}
+
+.itemName {
+  font-weight: bold; /* Bold for item name */
+  font-size: 1rem; /* Slightly larger font size */
+  color: var(--text-dark); /* Dark text for item name */
+}
+
+.itemQuantity,
+.itemPrice {
+  display: block; /* Display each on a new line */
+  color: var(--text-light); /* Slightly lighter color for details */
+  font-size: 0.9rem; /* Smaller font size for details */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .orderItems {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+
+  .productDetails {
+    margin-bottom: 10px; /* Space between product details */
+  }
+}

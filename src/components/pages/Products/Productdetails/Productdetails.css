@@ -1,0 +1,238 @@
+:root {
+  --primary-green: #00b761;
+  --dark-green: #008c4a;
+  --light-green: #f0fff4;
+  --accent-orange: #ff6b6b;
+  --text-dark: #1a1a1a;
+  --text-light: #666666;
+  --white: #ffffff;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+}
+/* Productdetails.css */
+
+.product-details-container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-details-header {
+  text-align: center;
+  color: var(--text-dark);
+  margin-bottom: 2.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.product-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+  transform: scale(1.02);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.product-name {
+  font-size: 2.2rem;
+  color: var(--text-dark);
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.product-price {
+  font-size: 2rem;
+  color: var(--primary-green);
+  font-weight: 600;
+  margin: 0;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: var(--gray-100);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+.quantity-control label {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.quantity-control input {
+  width: 100px;
+  padding: 0.8rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+}
+
+.quantity-control input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 4px rgba(0, 183, 97, 0.1);
+}
+
+.proceed-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background-color: var(--primary-green);
+  color: var(--white);
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.proceed-button:hover {
+  background-color: var(--dark-green);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 183, 97, 0.2);
+}
+
+.proceed-button svg {
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .product-content {
+    gap: 2rem;
+  }
+  
+  .product-name {
+    font-size: 1.8rem;
+  }
+  
+  .product-price {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-image-container {
+    text-align: center;
+  }
+  
+  .product-image {
+    max-width: 400px;
+  }
+  
+  .product-info {
+    gap: 1.5rem;
+  }
+
+  .features-list {
+    padding: 1rem;
+  }
+
+  .feature-item {
+    font-size: 0.9rem;
+  }
+
+  .proceed-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-details-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .quantity-control {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .features-list {
+    gap: 0.8rem;
+  }
+
+  .feature-item svg {
+    font-size: 1rem;
+  }
+}
+
+.product-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--light-green);
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.feature-item svg {
+  color: var(--primary-green);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.feature-item:hover {
+  transform: translateX(5px);
+  transition: transform 0.3s ease;
+}

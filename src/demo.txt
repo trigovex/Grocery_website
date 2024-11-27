@@ -1,0 +1,504 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from '../Layout/Layout';
+import Home from '../pages/Home/Home';
+import Categories from '../pages/Categories/Categories';
+import Deals from '../pages/Deals/Deals';
+import Cart from '../pages/Cart/Cart';
+import Wishlist from '../pages/Wishlist/Wishlist';
+import Alerts from '../pages/Alerts/Alerts';
+import Account from '../pages/Account/Account';
+import Organic from '../pages/Categories/Organic';
+import Orders from '../pages/Orders/Orders';
+import FreshProduce from '../pages/Categories/FreshProduce';
+import Dairy from '../pages/Categories/Dairy';
+import Meat from '../pages/Categories/Meat';
+import Bakery from '../pages/Categories/Bakery';
+
+const AppRoutes = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="deals" element={<Deals />} />
+          <Route path="orders" element={<Orders/>} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="wishlist" element={<Wishlist />} />
+          <Route path="alerts" element={<Alerts />} />
+          <Route path="account" element={<Account />} />
+          <Route path="categories/organic" element={<Organic />} />
+          <Route path="categories/fresh-produce" element={<FreshProduce />} />
+          <Route path="categories/dairy" element={<Dairy />} />
+          <Route path="categories/meat" element={<Meat />} />
+          <Route path="categories/bakery" element={<Bakery />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
+
+export default AppRoutes; 
+
+
+
+
+import { Outlet, useLocation } from 'react-router-dom';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Section from '../Section/Section';
+import '../../globals.css'; // Ensure this is included if you have global styles
+
+const Layout = () => {
+  const location = useLocation();
+
+  // Define the paths where the Section should not be displayed
+  const hideSectionPaths = ['/alerts', '/wishlist', '/account', '/orders','/orderdetails','/cart', '/categories/organic','/categories/fresh-produce','/categories/dairy','/categories/meat','/categories/bakery'];
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header />
+      <main>
+        {!hideSectionPaths.includes(location.pathname) && <Section />}
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;
+
+
+// src/components/pages/OrderDetails/OrderDetails.jsx
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import styles from './Orderdetails.module.css'; // Ensure you have a CSS file for styling
+
+const Orderdetails = () => {
+  const { orderId } = useParams(); // Get the order ID from the URL
+  
+  const navigate = useNavigate();
+
+  // Example order data (in a real app, this would come from an API)
+  const orders = [
+    {
+      id: 1,
+      date: '2023-10-01',
+      status: 'Delivered',
+      paymentMethod: 'Credit Card',
+      totalAmount: 320,
+      items: [
+        {
+          id: 'p1',
+          name: 'Organic Apples',
+          quantity: 2,
+          price: 150,
+          image: 'https://images.unsplash.com/photo-1589927986089-3581237890c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fGFwcGxlJTIwY29sb3J8ZW58MHx8fHwxNjA4MjY0NjY0&ixlib=rb-1.2.1&q=80&w=400',
+        }
+      ],
+    },
+    {
+      id: 2,
+      date: '2023-10-05',
+      status: 'Pending',
+      paymentMethod: 'PayPal',
+      totalAmount: 50,
+      items: [
+        {
+          id: 'p2',
+          name: 'Dairy Milk',
+          quantity: 1,
+          price: 50,
+          image: 'https://images.unsplash.com/photo-1589927986089-3581237890c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fGRhaXJ5JTIwbWlsayUyMGltYWdlfGVufDB8fHx8MTYwODI2NDY2NA&ixlib=rb-1.2.1&q=80&w=400',
+        },
+      ],
+    },
+    // Add more orders as needed
+  ];
+
+  // Find the order by ID
+ 
+  const order = orders.find(o => o.id === parseInt(orderId));
+
+  if (!order) {
+    return <p>Order not found.</p>;
+  }
+
+  const handleOrderAgain = (item) => {
+    navigate(`/product/${item.id}`, { state: { product: item } });
+  };
+
+  return (
+    <div className={styles.orderDetailsContainer}>
+      {console.log('order details')}
+      <h1>Order Details</h1>
+      <h2>Order #{order.id}</h2>
+      <p>Date: {order.date}</p>
+      <p>Status: {order.status}</p>
+      <p>Payment Method: {order.paymentMethod}</p>
+      <p>Total Amount: ₹{order.totalAmount}</p>
+      <h3>Items:</h3>
+      <div className={styles.orderItems}>
+        {order.items.map(item => (
+          <div key={item.id} className={styles.productDetails}>
+            <img src={item.image} alt={item.name} className={styles.productImage} />
+            <div className={styles.itemDetails}>
+              <span className={styles.itemName}>{item.name}</span>
+              <span className={styles.itemQuantity}>Quantity: {item.quantity}</span>
+              <span className={styles.itemPrice}>Price: ₹{item.price}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.actions}>
+        <button className={styles.orderAgainButton} onClick={() => handleOrderAgain(item)}>Order Again</button>
+        <button className={styles.viewSimilarButton} onClick={() => alert('View Similar Items functionality not implemented.')}>View Similar Items</button>
+      </div>
+    </div>
+  );
+};
+
+export default Orderdetails;
+
+
+
+.orderAgainButton {
+  background-color: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px; /* Increased padding for a better look */
+  cursor: pointer;
+  margin-right: 10px; /* Space between buttons */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  font-weight: bold;
+  font-size: 1rem; /* Make the font slightly bigger */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
+
+.orderAgainButton:hover {
+  background-color: var(--dark-green);
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Optional: Add icon styling for the button */
+.orderAgainButton svg {
+  font-size: 1.3rem; /* Set size of the icon */
+}
+
+
+
+
+
+
+
+
+
+
+.footer {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 2rem 0;
+}
+
+/* Newsletter Section */
+.newsletter {
+  background-color: #ffcc00;
+  padding: 1rem 0;
+}
+
+.newsletterContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.newsletterText h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 1rem;
+  min-width: 400px;
+}
+
+.newsletterForm input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+}
+
+.newsletterForm button {
+  padding: 1rem 2rem;
+  background: var(--accent-orange);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletterForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Features Bar */
+.featuresBar {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
+
+.featuresBar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.featureIcon {
+  font-size: 2rem;
+  color: var(--primary-green);
+}
+
+.feature h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Main Footer */
+.mainFooter {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 2rem 1.5rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footerColumn h3 {
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.footerLogo {
+  font-size: 1.6rem !important;
+  margin-bottom: 0.8rem !important;
+}
+
+.footerLogo span {
+  color: var(--primary-green);
+}
+
+.companyDesc {
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-light);
+}
+
+.contactItem svg {
+  color: var(--primary-green);
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerLinks li {
+  margin-bottom: 0.6rem;
+}
+
+.footerLinks a {
+  color: #007bff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footerLinks a:hover {
+  text-decoration: underline;
+}
+
+.appButtons {
+  display: flex;
+  gap: 0.8rem;
+  margin: 0.8rem 0;
+}
+
+.appButtons img {
+  height: 35px;
+  cursor: pointer;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.socialIcon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--light-green);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.socialIcon:hover {
+  background: var(--primary-green);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Payment Section */
+.paymentSection {
+  border-top: 1px solid var(--gray-200);
+  padding: 1.5rem 0;
+}
+
+.paymentWrapper {
+  text-align: center;
+}
+
+.paymentWrapper h4 {
+  margin-bottom: 0.8rem;
+  color: var(--text-dark);
+}
+
+.paymentIcons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-light);
+  font-size: 1.8rem;
+}
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.copyrightLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.copyrightLinks a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.copyrightLinks a:hover {
+  color: var(--primary-green);
+}
+
+.divider {
+  color: var(--gray-200);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .footerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .newsletterContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .newsletterForm {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .featuresBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .copyright {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .featuresBar {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+  }
+
+  .copyrightLinks {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .divider {
+    display: none;
+  }
+} 
